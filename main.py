@@ -74,8 +74,8 @@ def post_retry(
     if not notif_data:
         raise InvalidField('notification_id', '400', 'Notification id does not exist')
 
-    # if notif_data.status != NotificationStatus.FAILED:
-    #     raise InvalidField('notification_id', '400', 'Notification has not yet failed')
+    if notif_data.status != NotificationStatus.FAILED:
+        raise InvalidField('notification_id', '400', 'Notification has not yet failed')
 
     notif_data = upsert_notification(
         'service', 

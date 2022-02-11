@@ -1,3 +1,4 @@
+import os
 import gevent
 import redis
 import json
@@ -80,6 +81,12 @@ def process_event(data, token):
 
 
 def generate_token():
+    request_body = {
+        'client_id': os.getenv('CLIENT_NOTIFICATION_CLIENT_ID'),
+        'client_secret': os.getenv('CLIENT_NOTIFICATION_CLIENT_SECRET')
+    }
+    response = requests.post('https://httpstat.us/200', data=request_body)
+    response.content
     return "some_token"
 
 if __name__ == "__main__":
